@@ -24,12 +24,15 @@ The detection model works quite well with a very limited dataset. The classifica
 
 The ground truth images which this fish tracker has been trained on are covered under the following license:
 
+
 ```
-Permission is granted for anyone to copy, use, modify, or distribute this data and accompanying documents for any purpose, provided this
-copyright notice is retained and prominently displayed, along with a note saying that the original data are available from our web page and
-refering to [1]. The data and documents are distributed without any warranty, express or implied. As the data were acquired for research
-purposes only, they have not been tested to the degree that would be advisable in any important application. All use of these data is
-entirely at the user's own risk.
+Permission is granted for anyone to copy, use, modify, or distribute this data and accompanying documents
+for any purpose, provided this copyright notice is retained and prominently displayed, along with a note
+saying that the original data are available from our web page and refering to [1]. The data and documents
+are distributed without any warranty, express or implied. As the data were acquired for research purposes
+only, they have not been tested to the degree that would be advisable in any important application. All
+use of these data is entirely at the user's own risk.
 ```
+
 
 [1] B. J. Boom, P. X. Huang, J. He, R. B. Fisher, "Supporting Ground-Truth annotation of image datasets using clustering", 21st Int. Conf. on Pattern Recognition (ICPR), 2012.
