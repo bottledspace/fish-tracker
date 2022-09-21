@@ -1,16 +1,29 @@
-The file `mkhogs.cc` contains the source for a small utility which converts images to HOG vectors for training SVM. The utility reads in all the images in a folder, converts them to vectors using the OpenCV HOG class, using the specified size. Then it outputs them as consecutive vectors, with the specified label, in libsvm format.
+# Overview
 
-There are also two modes for converting the images: `r` for randomized sub images (useful for negative examples) and `s` for resizing the image. As an example:
+The following is a program for tracking species of marine fish from underwater video footage, for the [Fish for Knowledge open challenge]().
 
-    ./mkhogs 64x64 r -1 detect/neg > detect.hogs
-    ./mkhogs 64x54 s +1 detect/pos >> detect.hogs
+The feature set was created from the [Histogram of Oriented Gradients](https://en.wikipedia.org/wiki/Histogram_of_oriented_gradients) of the [ground truth images provided](https://homepages.inf.ed.ac.uk/rbf/Fish4Knowledge/GROUNDTRUTH/RECOG/)[1]. This involves partitioning each image into an array of cells. For each cell a corresponding histogram is computed, by counting how many pixels in the cell that the gradient falls into discrete angle intervals.
 
-This would label randomized sub images from the folder `detect/neg` with the value -1, and label scaled images from the folder `detect/pos` with the value 1.
+    ./mkhogs 64x64 s +1 detect/pos > detect.hogs
 
-To train the model I used the Fish Recognition Ground-Truth database\sidenote{See \url{groups.inf.ed.ac.uk/f4k/GROUNDTRUTH/RECOG/}}, though in retrospect a database with clearer reference pictures and less total fish species would have probably been a better choice here.
+In addition to the ground truth images, a second class of negative images was also used. There are also two modes for converting the images: `r` for randomized sub images (useful for negative examples) and `s` for resizing the image. As an example:
 
-See [*] for a demonstration of the tracker in action, using footage provided by the Fish for Knowledge database. The file `fishcls.cc` contains a program which uses two SVM model files provided to detect and then classify fish in a video source. The first model is converted from libsvm's format to OpenCV and then processed by OpenCV's HOG class. We pass the second model to a libsvm C++ wrapper `llsvm` which attempts to classify the regions of the frame which are detected to be fish by the first pass.
+    ./mkhogs 64x64 r -1 detect/neg >> detect.hogs
+    
+Once our training set has been created the model is then trained using libSVM. Two models were trained: one for detecting fish, and the other for classifying between species of fish.
 
-The results of the detection were surprisingly good considering only 50 positive and 50 negative samples were used, but the classification of species left something to be desired. I found that the training was very sensitive to the quality of the images, fewer high contrast and clear images was better than lots of lower quality ones. I hand picked the best 10 of each species of fish, for a total of 230 images, but even so it often gets the species wrong.
+    svm-train detect.hogs detect.model
 
-To improve the results further I think that in addition to better reference photos, retaining and using the results of previous frames would be necessary, since the fish can often become more difficult to determine at certain angles.
+Finally, each frame of video is converted to a histogram of oriented gradients as with our featureset. Then a sliding window approach is used to detect fish using the detection model. If a fish is detected it can then be classified using the corresponding subregion of the image. The results are seen in the video above using footage provided by the [].
+
+    ./fishcls 64x64 detect.model classify.model video.mp4
+
+The detection model works quite well with a very limited dataset. The classification of species did not perform nearly as well, and is a source for future work. In particular, I believe results would be improved by reusing information from past frames when classifying, in order to avoid alternating classifications between frames. Another potential direction would be to use a different classification technique entirely for determining species, perhaps combining the fast detection using SVM with a slower but more accurate technique for species classification.
+
+# Citations
+
+The ground truth images which this fish tracker has been trained on are covered under the following license:
+
+Permission is granted for anyone to copy, use, modify, or distribute this data and accompanying documents for any purpose, provided this copyright notice is retained and prominently displayed, along with a note saying that the original data are available from our web page and refering to [1]. The data and documents are distributed without any warranty, express or implied. As the data were acquired for research purposes only, they have not been tested to the degree that would be advisable in any important application. All use of these data is entirely at the user's own risk.
+
+[1] B. J. Boom, P. X. Huang, J. He, R. B. Fisher, "Supporting Ground-Truth annotation of image datasets using clustering", 21st Int. Conf. on Pattern Recognition (ICPR), 2012.
