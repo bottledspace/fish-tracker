@@ -1,4 +1,4 @@
-![](example.mov)
+https://user-images.githubusercontent.com/113856426/191630163-6e12614a-11bd-4e27-879c-804dfd9493b4.mov
 
 # Overview
 
@@ -11,6 +11,10 @@ The feature set was created from the [Histogram of Oriented Gradients](https://e
 In the example above the features are labelled with a `+1` to indicate they belong to the positive class. In addition to the ground truth images, a second class of negative images was appended. The positive and negative classes each used 50 images. The positive images were all resized to 64x64 using the `s` option in the example above, and for the negative images random regions of size 64x64 were selected from each non-fish image using the `r` option.
 
     ./mkhogs 64x64 r -1 detect/neg >> detect.hogs
+
+https://user-images.githubusercontent.com/113856426/191630077-f0046005-06f4-44a5-a1e4-a954b4af7def.mov
+
+
     
 Once our training set has been created our model is then trained using libSVM. Two models were trained: one for detecting fish, and the other for classifying between species of fish. The classification model uses 23 classes, each with 10 examples of fish.
 
