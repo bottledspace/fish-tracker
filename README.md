@@ -1,3 +1,5 @@
+![](example.mov)
+
 # Overview
 
 The following is a program for tracking species of marine fish from underwater video footage, for the [Fish for Knowledge open challenge](), and served as an opportunity to explore the use of support vector machines as a pattern recognition technique for computer vision. The results proved to be quite promising: given a very small amount of data, and even smaller images, a model could be constructed which detected fish from under water video footage with reasonable accuracy and excellent performance.
