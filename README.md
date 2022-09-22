@@ -12,9 +12,6 @@ In the example above the features are labelled with a `+1` to indicate they belo
 
     ./mkhogs 64x64 r -1 detect/neg >> detect.hogs
 
-https://user-images.githubusercontent.com/113856426/191630077-f0046005-06f4-44a5-a1e4-a954b4af7def.mov
-
-
     
 Once our training set has been created our model is then trained using libSVM. Two models were trained: one for detecting fish, and the other for classifying between species of fish. The classification model uses 23 classes, each with 10 examples of fish.
 
