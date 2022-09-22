@@ -2,7 +2,7 @@ https://user-images.githubusercontent.com/113856426/191630163-6e12614a-11bd-4e27
 
 # Overview
 
-The following is a program for tracking species of marine fish from underwater video footage, for the [Fish for Knowledge open challenge](), and served as an opportunity to explore the use of support vector machines as a pattern recognition technique for computer vision. The results proved to be quite promising: given a very small amount of data, and even smaller images, a model could be constructed which detected fish from under water video footage with reasonable accuracy and excellent performance.
+The following is a program for tracking species of marine fish from underwater video footage, for the [Fish for Knowledge open challenge](https://homepages.inf.ed.ac.uk/rbf/Fish4Knowledge/), and served as an opportunity to explore the use of support vector machines as a pattern recognition technique for computer vision. The results proved to be quite promising: given a very small amount of data, and even smaller images, a model could be constructed which detected fish from under water video footage with reasonable accuracy and excellent performance.
 
 The feature set was created from the [Histogram of Oriented Gradients](https://en.wikipedia.org/wiki/Histogram_of_oriented_gradients) of the [ground truth images provided](https://homepages.inf.ed.ac.uk/rbf/Fish4Knowledge/GROUNDTRUTH/RECOG/). This involves partitioning each image into an array of cells. For each cell a corresponding histogram is computed, by counting how many pixels in the cell that the gradient falls into discrete angle intervals.
 
